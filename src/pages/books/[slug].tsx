@@ -35,6 +35,16 @@ export const getStaticProps = async ({ params }: any) => {
     content_type: "recipe",
     "fields.slug": params.slug,
   });
+
+  if (!items.length) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: { book: items[0] },
     revalidate: 1,
